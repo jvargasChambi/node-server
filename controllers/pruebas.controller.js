@@ -159,6 +159,27 @@ const createUser = async(req = request, res = response) => {
             });
     }
 
+    const eliminarSala = async(req = request, res = response) => {
+        const body = req.body; 
+        const {nombre, user} = req.body;
+        var mensaje = "";
+        var bandera = true;
+        //validar que no exista
+        const room = await Sala.deleteOne({ nombre, user });
+        if (room.deletedCount != 1) {
+            bandera = false;
+            mensaje = "No se encontro sala a eliminar";
+        } else {           
+            mensaje = "Sala Eliminada";
+        }
+
+        res.json(
+            {
+                succes:bandera,
+                mensaje:mensaje
+            });
+    }
+
 
 
 module.exports = {
@@ -170,5 +191,6 @@ module.exports = {
     singGoogle,
     createUser,
     createSala,
-    updateSala    
+    updateSala  ,
+    eliminarSala  
 }

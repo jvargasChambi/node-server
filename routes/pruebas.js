@@ -1,6 +1,15 @@
 
 const{ Router } = require('express');
-const { pruebasPost, validateUser, validateRoom, validateLogin, obtenerSalas, singGoogle ,createUser, createSala, updateSala } = require('../controllers/pruebas.controller');
+const { pruebasPost, 
+        validateUser, 
+        validateRoom, 
+        validateLogin, 
+        obtenerSalas, 
+        singGoogle ,
+        createUser, 
+        createSala, 
+        updateSala,
+        eliminarSala } = require('../controllers/pruebas.controller');
 
 const router = new Router();
 
@@ -21,5 +30,7 @@ const router = new Router();
   router.post('/api/createSala', createSala);
 
   router.put('/api/updateSala', updateSala);
+
+  router.post('/api/eliminarSala', eliminarSala);
 
   module.exports = router;
