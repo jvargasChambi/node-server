@@ -4,8 +4,198 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+          .container_button_css {
+          display: grid;
+          grid-template-areas: "col1 col2 col3";
+        }
+        
+        .item-1 { grid-area: col1;  }
+        .item-2 { grid-area: col2; text-align: center; width: 0px; }
+        .item-3 { grid-area: col3; }
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 13pt;
+  font-family: 'Raleway', sans-serif;
+}
+
+#logo {
+  grid-area: logo;
+  padding: 1em;
+}
+#logo img {
+  width: 100%;
+  height: auto;
+}
+
+
+#logo_ss {
+  grid-area: logo_ss;
+  padding: 1em;
+}
+#logo_ss img {
+  width: 50%;
+  height: auto;
+}
+
+#form {
+  grid-area: form;
+  text-align: center;
+  background-color: #2C98DC;
+  padding: 2em;
+  color: #eee;
+}
+#form form {
+  width: 100%;
+  height: auto;
+  font-family: 'Raleway', sans-serif;
+}
+#form input {
+  border: 1px solid beige;
+  border-radius: 5px;
+  margin: 3px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13pt;
+  padding: 5px;
+  width: 95%;
+  color: lightcyan;
+}
+
+
+
+#form input[type="submit"] {
+  background: #7C8186;
+  color: #fff;
+  border: none;
+  border-bottom: solid darken(#1abc9c, 7%);
+  font-family: 'Raleway', sans-serif;
+  font-size: 1em;
+  width:200px;
+  font-weight: bold;
+  &:focus,
+  &:hover {
+    background: #AED243;
+    border-bottom-color: darken(#16a085, 7%);
+  }
+  &:active {
+    background: #1bc2a2;
+    border-bottom-color: darken(#1bc2a2, 7%);
+  }
+
+}
+
+footer {
+  grid-area: footer;
+  text-align: center;
+  align-self: end;
+}
+
+a.link {
+  color: #1C688D;
+}
+
+
+  #form {
+      font-family: 'Raleway', sans-serif;
+    border-radius: 10px;
+    box-shadow: #10385D 0px 0px 0px;
+  }
+
+  @media screen and (max-width: 800px) {
+  .site {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto 1fr;
+    grid-gap: 1em;
+    grid-template-areas:
+      "logo"
+      "form"
+      "footer"
+  }
+}
+@media screen and (min-width: 800px) {
+  .site {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: 1fr 1fr auto 1fr;
+    grid-gap: 1em;
+    grid-template-areas:
+      ". . ."
+      ". logo ."
+      ". form ."
+      "footer footer footer"
+  }
+}
+    </style>
 </head>
-<body>
-        <h1>Acceso Denegado</h1>
+<body>       
+        <div class="site">
+            <div id="logo">
+              <img src="https://lirp.cdn-website.com/97852e4d/dms3rep/multi/opt/Logo+Smart+Transparente-horizontal-1920w.png" alt="Logo">
+            </div>
+            <div id="form">
+              <img src="https://raw.githubusercontent.com/jvargasChambi/teletest/253c2cab104433eeb6dc390ef83f75ae639779bc/public/tecnic.png?token=GHSAT0AAAAAACG3L7MFNRDUY3LQIQLEEPBUZHZKUNA" width="100px" alt=""><br/>
+               <br/>
+              <b>Inicio Sesion Ticket Soporte</b>
+              
+               <form id='form_login_soporte'>
+               <input type="text" name="usuario" id="usuario" placeholder="Usuario" required><br/>
+                <input type="password" name="password" id="password" placeholder="Contraseña" required><br/>
+                <a href="#" class="login__forgot">Forgot Password?</a>
+                <input type="submit" value="Log in" /> 
+                    <div id="g_id_onload"
+                  data-client_id="259124987849-n7pjefg61g07lusso7v5ejdgbv857lgr.apps.googleusercontent.com"        
+                  data-auto_prompt="false"
+                  data-callback="handleCredentialResponse">
+              </div>
+          
+          
+          <div class="container_button_css">
+                  <div class="item item-1"></div>
+                  <div class="item item-2">
+                      <div class="g_id_signin"
+                  data-type="standard"
+                  data-size="large"
+                  data-theme="outline"
+                  data-text="sign_in_with"
+                  data-shape="rectangular"
+                  data-logo_alignment="left">
+              </div>
+                  </div>
+                  <div class="item item-3"></div>
+              </div>
+              </form> 
+            </div>
+            <footer>
+              <a href="https://www.smartstrategyapps.com" class="link">SmartStrategy</a>
+            </footer>
+          </div>
+
+    
+        <script src="https://accounts.google.com/gsi/client" async></script>
+
+        <script>
+            function handleCredentialResponse(response) {
+               // decodeJwtResponse() is a custom function defined by you
+               // to decode the credential response.
+               console.log('TOKEN', response.credential);
+                const param = {id_token: response.credential}
+              // fetch('http://localhost:8090/respuestaXml/api/googleSing', {
+                fetch('http://localhost/SMART/ticketService/googleSign.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify(param)
+               })
+                    .then( resp => resp.json() )
+                    .then( resp => {
+                        console.log(resp);
+                    })
+                    .catch( console.warn);
+            }
+          </script>
 </body>
 </html>
